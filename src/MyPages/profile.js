@@ -71,17 +71,6 @@ export default function Profile() {
     speak({ text: `${field} ${newValue ? 'enabled' : 'disabled'}` });
   };
 
-  const handleSelectChange = (field, value) => {
-    const updatedPreferences = {
-      ...preferences,
-      [field]: value
-    };
-    setPreferences(updatedPreferences);
-    setEditValues(updatedPreferences);
-    localStorage.setItem("userPreferences", JSON.stringify(updatedPreferences));
-    speak({ text: `${field} changed to ${value}` });
-  };
-
   const TabButton = ({ tabId, label, icon }) => (
     <button
       onClick={() => setActiveTab(tabId)}

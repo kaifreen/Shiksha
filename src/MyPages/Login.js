@@ -257,9 +257,9 @@ function LoginPage() {
             {/* Footer */}
             <div className="text-center text-xs text-gray-500 space-y-1">
               <p>
-                <a href="#" className="text-indigo-600 hover:text-indigo-700">
+                <button className="text-indigo-600 hover:text-indigo-700 bg-none border-none cursor-pointer">
                   Forgot password?
-                </a>
+                </button>
               </p>
               <p className="text-gray-400">© 2024 Shiksha. All rights reserved.</p>
             </div>

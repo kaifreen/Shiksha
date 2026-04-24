@@ -19,7 +19,6 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import Lead from "./MyComponents/leaders"
-import Login from './MyComponents/login'
 import LoginPage from './MyPages/Login'
 import SignupPage from './MyPages/Signup'
 import Banner from './MyComponents/banner'

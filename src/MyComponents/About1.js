@@ -7,12 +7,6 @@ const links = [
   { name: 'Our values', href: '#' },
   { name: 'Meet our leadership', href:'#leadership'},
 ]
-const stats = [
-  { name: 'Full-Time Tutors', value: '160+' },
-  { name: 'Students Tutored', value: '300+' },
-  { name: 'Lecture Videos', value: '450+' },
-  { name: 'Price', value: 'Free' },
-]
 const people = [
   {
     name: 'Aayush Talreja',

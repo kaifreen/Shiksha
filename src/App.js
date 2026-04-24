@@ -90,31 +90,29 @@ function App() {
         <div className='App'>
           <VoiceNav/>
           <Routes>
-            {/* Public Routes */}
+            {/* Public Routes - Only login and signup */}
             <Route path="/" element={<LoginPage/>} />
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/home" element={<Hero/>} />
             
-            {/* Protected Routes */}
+            {/* Protected Routes - Require authentication */}
+            <Route path="/home" element={<ProtectedRoute><Hero/></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
             <Route path="/video" element={<ProtectedRoute><Videos/></ProtectedRoute>} />
             <Route path="/videos" element={<ProtectedRoute><Videos/></ProtectedRoute>} />
+            <Route path="/coursecat" element={<ProtectedRoute><Coursecat/></ProtectedRoute>} />
+            <Route path="/recruiter" element={<ProtectedRoute><Home/></ProtectedRoute>} />
+            <Route path="/aboutus" element={<ProtectedRoute><Aboutus/></ProtectedRoute>} />
+            <Route path="/ngoenroll" element={<ProtectedRoute><Ngoenroll/></ProtectedRoute>} />
+            <Route path="/donation" element={<ProtectedRoute><Donation/></ProtectedRoute>} />
+            <Route path="/sidebarvideo" element={<ProtectedRoute><Sidebarvideo/></ProtectedRoute>} />
+            <Route path="/leaders" element={<ProtectedRoute><Lead/></ProtectedRoute>}/>
+            <Route path="/banner" element={<ProtectedRoute><Banner/></ProtectedRoute>}/>
+            <Route path="/science" element={<ProtectedRoute><Science/></ProtectedRoute>}/>
+            <Route path="/math" element={<ProtectedRoute><Math/></ProtectedRoute>}/>
+            <Route path="/english" element={<ProtectedRoute><English/></ProtectedRoute>}/>
             
-            {/* Semi-Protected Routes (Accessible but better with auth) */}
-            <Route path="/coursecat" element={<Coursecat/>} />
-            <Route path="/recruiter" element={<Home/>} />
-            <Route path="/aboutus" element={<Aboutus/>} />
-            <Route path="/ngoenroll" element={<Ngoenroll/>} />
-            <Route path="/donation" element={<Donation/>} />
-            <Route path="/sidebarvideo" element={<Sidebarvideo/>} />
-            <Route path="/leaders" element={<Lead/>}/>
-            <Route path="/banner" element={<Banner/>}/>
-            <Route path="/science" element={<Science/>}/>
-            <Route path="/math" element={<Math/>}/>
-            <Route path="/english" element={<English/>}/>
-            
-            {/* Catch-all redirect */}
+            {/* Catch-all redirect to login */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>

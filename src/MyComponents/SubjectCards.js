@@ -10,18 +10,6 @@ export default function SubjectCards() {
 
   const subjects = [
     {
-      name: "Science",
-      description:
-        "Science helps us understand the world around us by exploring natural phenomena, conducting experiments, and making observations.",
-      imageSrc: sci,
-    },
-    {
-      name: "Mathematics",
-      description:
-        "Mathematics is the language of the universe, and it plays a vital role in various fields of science and technology.",
-      imageSrc: math,
-    },
-    {
       name: "English",
       description:
         "English is a global language, and it's essential for communication, literature, and many other aspects of life.",
@@ -32,6 +20,18 @@ export default function SubjectCards() {
       description:
         "Hindi, as one of India's official languages, plays a crucial role in fostering cultural identity and communication among its diverse population.",
       imageSrc: hin,
+    },
+    {
+      name: "Mathematics",
+      description:
+        "Mathematics is the language of the universe, and it plays a vital role in various fields of science and technology.",
+      imageSrc: math,
+    },
+    {
+      name: "Science",
+      description:
+        "Science helps us understand the world around us by exploring natural phenomena, conducting experiments, and making observations.",
+      imageSrc: sci,
     },
   ];
 
@@ -62,10 +62,7 @@ export default function SubjectCards() {
                     GO TO COURSE
                   </span>
                 </button>
-                <p className="mt-1 text-sm font-semibold tracking-wide text-gray-700 uppercase">
-                  REV-2019'C' Scheme
-                </p>
-                
+
               </div>
             </div>
           </div>

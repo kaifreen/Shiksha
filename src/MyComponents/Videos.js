@@ -35,7 +35,7 @@ const Videos = () => {
     { src: english2Video, title: "English - Lecture 2", subject: "English" },
     { src: hindi1Video, title: "Hindi - Lecture 1", subject: "Hindi" },
     { src: hindi2Video, title: "Hindi - Lecture 2", subject: "Hindi" },
-    { src: science2Video, title: "Science - Lecture 2", subject: "Science" },
+    { src: science2Video, title: "Science - Lecture 1", subject: "Science" },
   ];
 
   const filteredVideos = subjectQuery 

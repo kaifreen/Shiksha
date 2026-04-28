@@ -717,7 +717,7 @@ function SignupPage() {
 
           {/* Footer */}
           <div className={`text-center text-xs mt-6 ${highContrast ? "text-gray-400" : "text-gray-500"}`}>
-            <p>© 2024 Shiksha. All rights reserved.</p>
+            <p>© 2026 Shiksha. All rights reserved.</p>
           </div>
         </div>
       </div>

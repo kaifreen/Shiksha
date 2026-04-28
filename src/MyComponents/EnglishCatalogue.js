@@ -24,7 +24,7 @@ function EnglishCatalogue() {
               Shams Tabrez
             </p>
             <a href="videos" class="btn btn-outline-primary">
-              <Link to="/videos" class="nav-link active">
+              <Link to="/videos?subject=English" class="nav-link active">
                 Enroll
               </Link>
             </a>
@@ -44,7 +44,7 @@ function EnglishCatalogue() {
               Shams Tabrez
             </p>
             <a href="videos" class="btn btn-outline-primary">
-              <Link to="/videos" class="nav-link active">
+              <Link to="/videos?subject=English" class="nav-link active">
                 Enroll
               </Link>
             </a>

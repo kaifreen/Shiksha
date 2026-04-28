@@ -28,10 +28,11 @@ function MathCatalogue() {
                 src="https://media.licdn.com/dms/image/D4D03AQG3tgMaLVMfug/profile-displayphoto-shrink_100_100/0/1666875030217?e=1685577600&v=beta&t=vfoT736oR7cZXkuDcl9J6ZSnJIOaJzpkaJ1D-Y6qh_0"
                 alt=""
               />
-              Mansi Bellani
+              <img className="h-30 w-10 rounded-full" src={profile} alt="" />
+              Sachin Bellani
             </p>
             <a href="videos" class="btn btn-outline-primary">
-              <Link to="/videos" class="nav-link active">
+              <Link to="/videos?subject=Maths" class="nav-link active">
                 Enroll
               </Link>
             </a>
@@ -51,7 +52,7 @@ function MathCatalogue() {
               Shams Tabrez
             </p>
             <a href="videos" class="btn btn-outline-primary">
-              <Link to="/videos" class="nav-link active">
+              <Link to="/videos?subject=Maths" class="nav-link active">
                 Enroll
               </Link>
             </a>

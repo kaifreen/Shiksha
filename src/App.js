@@ -26,6 +26,7 @@ import Profile from './MyPages/profile'
 import Science from './MyPages/Science'
 import Math from './MyPages/Math'
 import English from './MyPages/English'
+import Hindi from './MyPages/Hindi'
 import VoiceNav from "./MyComponents/VoiceNav"
 import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
@@ -104,8 +105,9 @@ function App() {
             <Route path="/leaders" element={<Lead/>}/>
             <Route path="/banner" element={<Banner/>}/>
             <Route path="/science" element={<Science/>}/>
-            <Route path="/math" element={<Math/>}/>
+            <Route path="/mathematics" element={<Math/>}/>
             <Route path="/english" element={<English/>}/>
+            <Route path="/hindi" element={<Hindi/>}/>
             
             {/* Protected Routes - Require authentication */}
             <Route path="/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>

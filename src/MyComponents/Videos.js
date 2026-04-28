@@ -1,11 +1,20 @@
 import { Button, Heading, Stack, Text, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 // import {Card, CardText, CardBody, CardTitle, CardSubtitle, CardImg} from 'reactstrap';
 import {
   Card,
 } from "@chakra-ui/react";
 import Header from "./../MyComponents/Header";
 import Footer from "./../MyPages/Footer";
+import numberVideo from "../Videos/Number.mp4";
+import numberConceptVideo from "../Videos/Number Concept.mp4";
+import english1Video from "../Videos/English1.mp4";
+import english2Video from "../Videos/English2.mp4";
+import hindi1Video from "../Videos/Hindi1.mp4";
+import hindi2Video from "../Videos/Hindi2.mp4";
+import science1Video from "../Videos/Science1.mp4";
+import science2Video from "../Videos/Science2.mp4";
 
 const Videos = () => {
   const videotitle = [
@@ -18,18 +27,26 @@ const Videos = () => {
 
   const [showModal, setShowModal] = React.useState(false);
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const subjectQuery = searchParams.get("subject");
+
   const videosArr = [
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/Photosynthesis.mp4?alt=media&token=21b4de4c-9057-4085-a64b-4cbb09123519",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/earthquake.mp4?alt=media&token=eb918051-aabe-4631-8696-b812b4915706",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/Photosynthesis.mp4?alt=media&token=21b4de4c-9057-4085-a64b-4cbb09123519",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/earthquake.mp4?alt=media&token=eb918051-aabe-4631-8696-b812b4915706",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/Photosynthesis.mp4?alt=media&token=21b4de4c-9057-4085-a64b-4cbb09123519",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/earthquake.mp4?alt=media&token=eb918051-aabe-4631-8696-b812b4915706",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/Photosynthesis.mp4?alt=media&token=21b4de4c-9057-4085-a64b-4cbb09123519",
-    "https://firebasestorage.googleapis.com/v0/b/shiksha-b8390.appspot.com/o/earthquake.mp4?alt=media&token=eb918051-aabe-4631-8696-b812b4915706",
+    { src: numberVideo, title: "Maths - Number", subject: "Maths" },
+    { src: numberConceptVideo, title: "Maths - Number Concept", subject: "Maths" },
+    { src: english1Video, title: "English - Lecture 1", subject: "English" },
+    { src: english2Video, title: "English - Lecture 2", subject: "English" },
+    { src: hindi1Video, title: "Hindi - Lecture 1", subject: "Hindi" },
+    { src: hindi2Video, title: "Hindi - Lecture 2", subject: "Hindi" },
+    { src: science1Video, title: "Science - Lecture 1", subject: "Science" },
+    { src: science2Video, title: "Science - Lecture 2", subject: "Science" },
   ];
 
-  const [videoSrc, setVideoSrc] = useState(videosArr[0]);
+  const filteredVideos = subjectQuery 
+    ? videosArr.filter(v => v.subject === subjectQuery) 
+    : videosArr;
+
+  const [videoSrc, setVideoSrc] = useState(filteredVideos.length > 0 ? filteredVideos[0].src : "");
 
   function about() {
     var player = { videoSrc };
@@ -73,10 +90,7 @@ const Videos = () => {
             <>
               <p className="text-gray-800 hover:text-sky-400 w-auto">
                 This is a sample video for testing and demo. This is called
-                description.This is a sample video for testing and demo. This is
-                called description.This is a sample video for testing and demo.
-                This is called description.This is a sample video for testing
-                and demo. This is called description.
+                description.
               </p>
             </>
           ) : null}
@@ -97,13 +111,14 @@ const Videos = () => {
           spacing={"8"}
           overflowY={"auto"}
         >
-          {videosArr.map((item, index) => (
+          {filteredVideos.map((item, index) => (
             <Button
               variant={"contained"}
               colorScheme={"blue"}
-              onClick={() => setVideoSrc(item)}
+              onClick={() => setVideoSrc(item.src)}
+              key={index}
             >
-              Lecture {index + 1}
+              {item.title}
             </Button>
           ))}
         </VStack>

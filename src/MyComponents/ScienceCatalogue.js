@@ -15,7 +15,7 @@ function ScienceCatalogue() {
         name: "Aayush Talreja",
         imgSrc: "https://media.licdn.com/dms/image/C4D03AQGjVJnZjakikg/profile-displayphoto-shrink_200_200/0/1657648501282?e=1685577600&v=beta&t=GZVLCtCI6mAVh0T4uTBJODcNWased_DRS3pxg73A7Vk",
       },
-      link: "/videos",
+      link: "/videos?subject=Science",
     },
     {
       title: "Environmental Science-2",
@@ -25,7 +25,7 @@ function ScienceCatalogue() {
         name: "Niranjan Yeole",
         imgSrc: "https://media.licdn.com/dms/image/C4E03AQFMaAxosx5O8A/profile-displayphoto-shrink_100_100/0/1642847850390?e=1685577600&v=beta&t=LDCn4WpFeU6vUMdAP6e9nQf4Cdz4DNs6zvy52GHkwVI",
       },
-      link: "/videos",
+      link: "/videos?subject=Science",
     },
     {
       title: "EVS-Practical",
@@ -35,7 +35,7 @@ function ScienceCatalogue() {
         name: "Anuj Bagad",
         imgSrc: "https://media.licdn.com/dms/image/C4D03AQG7ln3Kb53VZA/profile-displayphoto-shrink_100_100/0/1641273867979?e=1685577600&v=beta&t=QRlrRpePXwAuUynmY0zhCahF2ZU4cKns6uUqbDMdIZE",
       },
-      link: "/videos",
+      link: "/videos?subject=Science",
     },
   ];
 

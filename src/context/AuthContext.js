@@ -1,14 +1,26 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import axios from "axios";
 import app from "../firebase";
 
 const AuthContext = createContext();
+const API_URL = "http://localhost:5000/api";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const auth = getAuth(app);
+
+  // Save user to MongoDB
+  const saveUserToMongo = async (userData) => {
+    try {
+      await axios.post(`${API_URL}/users/save`, userData);
+      console.log("✅ User saved to MongoDB");
+    } catch (error) {
+      console.error("❌ Error saving user to MongoDB:", error);
+    }
+  };
 
   // Listen for auth state changes
   useEffect(() => {
@@ -22,6 +34,9 @@ export function AuthProvider({ children }) {
         };
         setUser(userData);
         localStorage.setItem("user", JSON.stringify(userData));
+        
+        // Save user to MongoDB
+        saveUserToMongo(userData);
       } else {
         // User is signed out
         setUser(null);

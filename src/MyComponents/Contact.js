@@ -1,10 +1,11 @@
-import React ,{useRef} from 'react'
+import React ,{useRef, useState} from 'react'
 // import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import feedimg from './../images/feedback.png'
 
 const Contact = () => {
   const form = useRef();
+  const [showModal, setShowModal] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -12,11 +13,16 @@ const Contact = () => {
     emailjs.sendForm('service_v6z4web', 'template_71rki5m', form.current, 'WBsHhIONN4glZMqDK')
       .then((result) => {
           console.log(result.text);
+          alert('Thank you for your feedback!');
+          setShowModal(true);
+          form.current.reset();
       }, (error) => {
           console.log(error.text);
+          alert('Thank you for your feedback!');
       });
     }
   return (
+    <>
 <form ref={form} onSubmit={sendEmail}>
         <section class="text-gray-600 body-font relative">
     <div class="container px-5 py-4 mx-auto flex sm:flex-nowrap flex-wrap">
@@ -45,7 +51,42 @@ const Contact = () => {
 </section>
     </form>
 
-    //create a form with 3 input fields and a submit button and use firebase  
+    {showModal ? (
+        <>
+          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <h3 className="text-3xl font-bold text-green-600">
+                    Success!
+                  </h3>
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                  </button>
+                </div>
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                  Your feedback has been submitted successfully! Thank you for your valuable feedback.
+                  </p>
+                </div>
+                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                  <button
+                    className="bg-green-600 text-white active:bg-green-800 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+    </>
   )
 }
 

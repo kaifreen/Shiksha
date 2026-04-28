@@ -261,7 +261,7 @@ function LoginPage() {
                   Forgot password?
                 </button>
               </p>
-              <p className="text-gray-400">© 2024 Shiksha. All rights reserved.</p>
+              <p className="text-gray-400">© 2026 Shiksha. All rights reserved.</p>
             </div>
           </div>
         </div>

@@ -8,12 +8,10 @@ import {
 import Header from "./../MyComponents/Header";
 import Footer from "./../MyPages/Footer";
 import numberVideo from "../Videos/Number.mp4";
-import numberConceptVideo from "../Videos/Number Concept.mp4";
 import english1Video from "../Videos/English1.mp4";
 import english2Video from "../Videos/English2.mp4";
 import hindi1Video from "../Videos/Hindi1.mp4";
 import hindi2Video from "../Videos/Hindi2.mp4";
-import science1Video from "../Videos/Science1.mp4";
 import science2Video from "../Videos/Science2.mp4";
 
 const Videos = () => {
@@ -33,12 +31,10 @@ const Videos = () => {
 
   const videosArr = [
     { src: numberVideo, title: "Maths - Number", subject: "Maths" },
-    { src: numberConceptVideo, title: "Maths - Number Concept", subject: "Maths" },
     { src: english1Video, title: "English - Lecture 1", subject: "English" },
     { src: english2Video, title: "English - Lecture 2", subject: "English" },
     { src: hindi1Video, title: "Hindi - Lecture 1", subject: "Hindi" },
     { src: hindi2Video, title: "Hindi - Lecture 2", subject: "Hindi" },
-    { src: science1Video, title: "Science - Lecture 1", subject: "Science" },
     { src: science2Video, title: "Science - Lecture 2", subject: "Science" },
   ];
 

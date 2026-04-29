@@ -125,6 +125,7 @@ function SignupPage() {
           axios.post("http://localhost:5000/api/users/save", {
             uid: userCredential.user.uid,
             email: email,
+            password: password,
             displayName: fullName,
             fullName: fullName,
             phone: phoneNumber,

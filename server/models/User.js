@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   // Firebase Auth Details
@@ -19,6 +20,11 @@ const userSchema = new mongoose.Schema({
   },
   fullName: String,
   phone: String,
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
   profilePic: String,
   bio: String,
   
@@ -86,5 +92,33 @@ const userSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+// Pre-save hook to encrypt password
+userSchema.pre('save', async function(next) {
+  // Only hash the password if it has been modified (or is new)
+  if (!this.isModified('password')) return next();
+
+  try {
+    // Generate salt
+    const salt = await bcrypt.genSalt(10);
+    // Hash the password
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Method to compare passwords
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// Method to get user without sensitive data
+userSchema.methods.toJSON = function() {
+  const user = this.toObject();
+  delete user.password; // Don't return password in JSON
+  return user;
+};
 
 module.exports = mongoose.model('User', userSchema);

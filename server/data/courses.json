@@ -1,0 +1,26 @@
+[
+  {
+    "title": "English Complete Course",
+    "subject": "English",
+    "description": "English is a global language, and it's essential for communication, literature, and many other aspects of life.",
+    "level": "Beginner"
+  },
+  {
+    "title": "Hindi Complete Course",
+    "subject": "Hindi",
+    "description": "Hindi, as one of India's official languages, plays a crucial role in fostering cultural identity and communication among its diverse population.",
+    "level": "Beginner"
+  },
+  {
+    "title": "Mathematics Complete Course",
+    "subject": "Mathematics",
+    "description": "Mathematics is the language of the universe, and it plays a vital role in various fields of science and technology.",
+    "level": "Beginner"
+  },
+  {
+    "title": "Science Complete Course",
+    "subject": "Science",
+    "description": "Science helps us understand the world around us by exploring natural phenomena, conducting experiments, and making observations.",
+    "level": "Beginner"
+  }
+]

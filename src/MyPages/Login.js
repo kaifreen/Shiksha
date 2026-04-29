@@ -9,6 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "./../images/bluelogo.png";
 import Navbar from "../MyComponents/Header";
 import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 
 function LoginPage() {
   const auth = getAuth(app);
@@ -78,10 +79,24 @@ function LoginPage() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setLoading(false);
-        const successMsg = "Successfully signed in! Redirecting to dashboard...";
-        speak({ text: successMsg });
-        setTimeout(() => navigate("/home"), 500);
+        // Sync user to MongoDB
+        axios.post("http://localhost:5000/api/users/save", {
+          uid: userCredential.user.uid,
+          email: userCredential.user.email,
+          displayName: userCredential.user.displayName || "User"
+        }).then(() => {
+          setLoading(false);
+          const successMsg = "Successfully signed in! Redirecting to dashboard...";
+          speak({ text: successMsg });
+          setTimeout(() => navigate("/home"), 500);
+        }).catch((dbError) => {
+          console.error("MongoDB sync failed on login:", dbError);
+          // Still log them in if DB sync fails
+          setLoading(false);
+          const successMsg = "Successfully signed in! Redirecting to dashboard...";
+          speak({ text: successMsg });
+          setTimeout(() => navigate("/home"), 500);
+        });
       })
       .catch((error) => {
         setLoading(false);

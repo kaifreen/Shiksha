@@ -10,6 +10,7 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "./../images/bluelogo.png";
 import Navbar from "../MyComponents/Header";
 import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 
 function SignupPage() {
   const auth = getAuth(app);
@@ -120,11 +121,26 @@ function SignupPage() {
           };
           localStorage.setItem("userPreferences", JSON.stringify(userPreferences));
 
-          setLoading(false);
-          const successMsg = "✅ Account created successfully! Please sign in.";
-          setSignupSuccess(successMsg);
-          speak({ text: "Account created successfully! Please sign in." });
-          setTimeout(() => navigate("/login"), 1000);
+          // Save user to MongoDB
+          axios.post("http://localhost:5000/api/users/save", {
+            uid: userCredential.user.uid,
+            email: email,
+            displayName: fullName,
+            phone: phoneNumber
+          }).then(() => {
+            setLoading(false);
+            const successMsg = "✅ Account created successfully! Please sign in.";
+            setSignupSuccess(successMsg);
+            speak({ text: "Account created successfully! Please sign in." });
+            setTimeout(() => navigate("/login"), 1000);
+          }).catch((dbError) => {
+            console.error("Failed to save to MongoDB:", dbError);
+            setLoading(false);
+            const successMsg = "✅ Account created successfully (DB sync delayed)! Please sign in.";
+            setSignupSuccess(successMsg);
+            speak({ text: "Account created successfully! Please sign in." });
+            setTimeout(() => navigate("/login"), 1000);
+          });
         }).catch((error) => {
           setLoading(false);
           setError("Failed to set up profile: " + error.message);

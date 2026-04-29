@@ -8,7 +8,7 @@ const courseSchema = new mongoose.Schema({
   description: String,
   subject: {
     type: String,
-    enum: ['Math', 'Science', 'English'],
+    enum: ['Mathematics', 'Science', 'English', 'Hindi'],
     required: true
   },
   instructor: String,

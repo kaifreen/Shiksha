@@ -13,6 +13,9 @@ import english2Video from "../Videos/English2.mp4";
 import hindi1Video from "../Videos/Hindi1.mp4";
 import hindi2Video from "../Videos/Hindi2.mp4";
 import science2Video from "../Videos/Science2.mp4";
+import axios from "axios";
+import { getAuth } from "firebase/auth";
+import app from "../firebase";
 
 const Videos = () => {
   const videotitle = [
@@ -43,29 +46,43 @@ const Videos = () => {
     : videosArr;
 
   const [videoSrc, setVideoSrc] = useState(filteredVideos.length > 0 ? filteredVideos[0].src : "");
+  const [trackedVideos, setTrackedVideos] = useState(new Set());
+  
+  const auth = getAuth(app);
+  const activeVideo = filteredVideos.find(v => v.src === videoSrc);
 
-  function about() {
-    var player = { videoSrc };
-    player.on("timeupdate", function () {
-      var currentTime = player.currentTime();
-      var duration = player.duration();
-
-      if (currentTime / duration >= 0.5) {
-        console.log("The user spent at least 50% of the video.");
+  const handleTimeUpdate = async (e) => {
+    const video = e.target;
+    if (!video.duration || !activeVideo) return;
+    
+    // Check if watched at least 50%
+    if (video.currentTime / video.duration >= 0.5) {
+      const videoKey = activeVideo.title;
+      
+      // If we haven't tracked this video yet and the user is logged in
+      if (!trackedVideos.has(videoKey) && auth.currentUser) {
+        // Optimistically add to tracked set so we don't spam the API
+        setTrackedVideos(prev => new Set(prev).add(videoKey));
+        
+        try {
+          await axios.post('http://localhost:5000/api/progress/watch-video', {
+            userId: auth.currentUser.uid,
+            courseId: activeVideo.subject,
+            videoId: activeVideo.title
+          });
+          console.log("Progress saved for:", activeVideo.title);
+        } catch (error) {
+          console.error("Failed to update progress:", error);
+          // If it fails, remove it from the set so it can try again
+          setTrackedVideos(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(videoKey);
+            return newSet;
+          });
+        }
       }
-    });
-
-    <VStack spacing={2} alignItems={"flex-start"} p={"6"} w={"full"}>
-      {videotitle.map((item) => (
-        // <Heading key={videotitle.name}>{videotitle.name}</Heading>
-        <Card maxW="l">
-          <Heading key={item.name}>{item.name}</Heading>
-          <Text key={item.description}>{item.description}</Text>
-        </Card>
-      ))}
-      ;
-    </VStack>;
-  }
+    }
+  };
   return (
     <>
       <Header />
@@ -75,11 +92,12 @@ const Videos = () => {
             controls
             controlsList="nodownload"
             src={videoSrc}
-            key={videotitle}
+            key={videoSrc}
+            onTimeUpdate={handleTimeUpdate}
             style={{
               width: "100%",
               marginTop: "0.6rem",
-            }} onClick={about}
+            }}
           ></video>
 
           {showModal ? (

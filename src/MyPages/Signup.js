@@ -126,6 +126,7 @@ function SignupPage() {
             uid: userCredential.user.uid,
             email: email,
             displayName: fullName,
+            fullName: fullName,
             phone: phoneNumber,
             disabilityType,
             needsSpecialAssistance,
@@ -136,6 +137,10 @@ function SignupPage() {
             dyslexiaFont,
             highContrast,
             textToSpeech,
+            termsAccepted: termsAccepted,
+            privacyAccepted: privacyAccepted,
+            termsAcceptedAt: new Date().toISOString(),
+            privacyAcceptedAt: new Date().toISOString(),
           }).then(() => {
             setLoading(false);
             const successMsg = "✅ Account created successfully! Please sign in.";

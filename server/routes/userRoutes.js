@@ -6,7 +6,7 @@ const router = express.Router();
 // Save or update user when they login
 router.post('/save', async (req, res) => {
   try {
-    const { uid, email, displayName } = req.body;
+    const { uid, email, displayName, ...otherDetails } = req.body;
 
     let user = await User.findOne({ uid });
 
@@ -14,7 +14,7 @@ router.post('/save', async (req, res) => {
       // Update existing user
       user = await User.findByIdAndUpdate(
         user._id,
-        { email, displayName, updatedAt: new Date() },
+        { email, displayName, ...otherDetails, updatedAt: new Date() },
         { new: true }
       );
     } else {
@@ -22,7 +22,8 @@ router.post('/save', async (req, res) => {
       user = new User({
         uid,
         email,
-        displayName
+        displayName,
+        ...otherDetails
       });
       await user.save();
     }

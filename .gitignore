@@ -23,8 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 .vercel
 
-# Large video files — exceed GitHub 100MB limit
-src/Videos/
-*.mp4
+# Large video files — but keep src/Videos for essential course videos
 *.mov
 *.avi

@@ -26,8 +26,6 @@ const userSchema = new mongoose.Schema({
   dyslexiaFont: Boolean,
   highContrast: Boolean,
   textToSpeech: Boolean,
-  enrolledCourses: [String],
-  completedCourses: [String],
   createdAt: {
     type: Date,
     default: Date.now

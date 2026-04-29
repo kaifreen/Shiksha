@@ -1,37 +1,37 @@
 [
   {
     "title": "Maths - Number",
-    "videoUrl": "../Videos/Number.mp4",
+    "videoUrl": "/videos/Number.mp4",
     "subject": "Mathematics",
     "order": 1
   },
   {
     "title": "English - Lecture 1",
-    "videoUrl": "../Videos/English1.mp4",
+    "videoUrl": "/videos/English1.mp4",
     "subject": "English",
     "order": 1
   },
   {
     "title": "English - Lecture 2",
-    "videoUrl": "../Videos/English2.mp4",
+    "videoUrl": "/videos/English2.mp4",
     "subject": "English",
     "order": 2
   },
   {
     "title": "Hindi - Lecture 1",
-    "videoUrl": "../Videos/Hindi1.mp4",
+    "videoUrl": "/videos/Hindi1.mp4",
     "subject": "Hindi",
     "order": 1
   },
   {
     "title": "Hindi - Lecture 2",
-    "videoUrl": "../Videos/Hindi2.mp4",
+    "videoUrl": "/videos/Hindi2.mp4",
     "subject": "Hindi",
     "order": 2
   },
   {
     "title": "Science - Lecture 1",
-    "videoUrl": "../Videos/Science2.mp4",
+    "videoUrl": "/videos/Science2.mp4",
     "subject": "Science",
     "order": 1
   }

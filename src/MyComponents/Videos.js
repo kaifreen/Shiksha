@@ -1,10 +1,8 @@
-import { Button, Heading, Stack, Text, VStack } from "@chakra-ui/react";
+import { Button, Stack, VStack } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 // import {Card, CardText, CardBody, CardTitle, CardSubtitle, CardImg} from 'reactstrap';
-import {
-  Card,
-} from "@chakra-ui/react";
+
 import Header from "./../MyComponents/Header";
 import Footer from "./../MyPages/Footer";
 import numberVideo from "../Videos/Number.mp4";
@@ -18,13 +16,7 @@ import { getAuth } from "firebase/auth";
 import app from "../firebase";
 
 const Videos = () => {
-  const videotitle = [
-    {
-      name: "Lecture Title",
-      description:
-        "This is a sample video for testing and demo. This is called description.This is a sample video for testing and demo. This is called description.This is a sample video for testing and demo. This is called description.This is a sample video for testing and demo. This is called description.",
-    },
-  ];
+
 
   const [showModal, setShowModal] = React.useState(false);
 
@@ -41,29 +33,29 @@ const Videos = () => {
     { src: science2Video, title: "Science - Lecture 1", subject: "Science" },
   ];
 
-  const filteredVideos = subjectQuery 
-    ? videosArr.filter(v => v.subject === subjectQuery) 
+  const filteredVideos = subjectQuery
+    ? videosArr.filter(v => v.subject === subjectQuery)
     : videosArr;
 
   const [videoSrc, setVideoSrc] = useState(filteredVideos.length > 0 ? filteredVideos[0].src : "");
   const [trackedVideos, setTrackedVideos] = useState(new Set());
-  
+
   const auth = getAuth(app);
   const activeVideo = filteredVideos.find(v => v.src === videoSrc);
 
   const handleTimeUpdate = async (e) => {
     const video = e.target;
     if (!video.duration || !activeVideo) return;
-    
+
     // Check if watched at least 50%
     if (video.currentTime / video.duration >= 0.5) {
       const videoKey = activeVideo.title;
-      
+
       // If we haven't tracked this video yet and the user is logged in
       if (!trackedVideos.has(videoKey) && auth.currentUser) {
         // Optimistically add to tracked set so we don't spam the API
         setTrackedVideos(prev => new Set(prev).add(videoKey));
-        
+
         try {
           await axios.post('http://localhost:5000/api/progress/watch-video', {
             userId: auth.currentUser.uid,

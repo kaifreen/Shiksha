@@ -14,11 +14,12 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected successfully'))
   .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// Routes (we'll add these in later steps)
+// Routes
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/courses', require('./routes/courseRoutes'));
 app.use('/api/progress', require('./routes/progressRoutes'));
 app.use('/api/feedback', require('./routes/feedbackRoutes'));
+app.use('/api/videos', require('./routes/videoRoutes'));
 
 // Test route
 app.get('/', (req, res) => {

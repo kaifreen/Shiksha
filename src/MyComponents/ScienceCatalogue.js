@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import vol from "./../images/volume.png";
 import { useSpeechSynthesis } from "react-speech-kit";
+import AddVideoModal from "./AddVideoModal";
 
 function ScienceCatalogue() {
   const { speak } = useSpeechSynthesis();
+
+  const [showAddVideo, setShowAddVideo] = useState(false);
+  const [addCourseId, setAddCourseId] = useState("");
+
+  const openAddVideo = (courseId) => {
+    setAddCourseId(courseId);
+    setShowAddVideo(true);
+  };
 
   const cardData = [
     {
@@ -44,7 +53,7 @@ function ScienceCatalogue() {
       <div className="flex-wrap gap-5 pt-5 justify-content-center d-flex">
         {cardData.map((card, index) => (
           <div className="card" style={{ width: "18rem" }} key={index}>
-            <img src={card.imgSrc} className="card-img-top" alt="..." />
+            <img src={card.imgSrc} className="card-img-top" alt={card.title} />
             <div className="font-semibold text-gray-500 card-body bg-sky-200">
               <h5 className="card-title fs-4">{card.title}</h5>
               <button onMouseOver={() => speak({ text: card.description })}>
@@ -55,14 +64,28 @@ function ScienceCatalogue() {
                 <img className="w-10 rounded-full h-30" src={card.instructor.imgSrc} alt="" />
                 {card.instructor.name}
               </p>
-              <Link to={card.link} className="justify-between btn btn-outline-primary">
-                Enroll
-              </Link>
-
+              <div className="d-flex gap-2 mt-2">
+                <Link to={card.link} className="btn btn-outline-primary">
+                  Enroll
+                </Link>
+                <button
+                  className="btn btn-success btn-sm"
+                  onClick={() => openAddVideo("Science")}
+                >
+                  ➕ Add Video
+                </button>
+              </div>
             </div>
           </div>
         ))}
       </div>
+
+      {showAddVideo && (
+        <AddVideoModal
+          courseId={addCourseId}
+          onClose={() => setShowAddVideo(false)}
+        />
+      )}
     </div>
   );
 }

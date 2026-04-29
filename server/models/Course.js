@@ -12,6 +12,7 @@ const courseSchema = new mongoose.Schema({
     required: true
   },
   instructor: String,
+  instructorImg: String,
   thumbnail: String,
   videoCount: {
     type: Number,
@@ -31,6 +32,10 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  ratingCount: {
+    type: Number,
+    default: 0
+  },
   enrolledCount: {
     type: Number,
     default: 0
@@ -41,4 +46,5 @@ const courseSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+// Third argument sets the exact MongoDB collection name → "CourseCatalogue"
+module.exports = mongoose.model('Course', courseSchema, 'CourseCatalogue');

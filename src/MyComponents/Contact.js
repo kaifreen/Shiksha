@@ -1,26 +1,44 @@
 import React ,{useRef, useState} from 'react'
 // import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import axios from 'axios';
 import feedimg from './../images/feedback.png'
 
 const Contact = () => {
   const form = useRef();
   const [showModal, setShowModal] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_v6z4web', 'template_71rki5m', form.current, 'WBsHhIONN4glZMqDK')
-      .then((result) => {
-          console.log(result.text);
-          alert('Thank you for your feedback!');
-          setShowModal(true);
-          form.current.reset();
-      }, (error) => {
-          console.log(error.text);
-          alert('Thank you for your feedback!');
-      });
+    // Extract form data
+    const formData = new FormData(form.current);
+    const feedbackData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+
+    try {
+      // 1. Store feedback in MongoDB
+      await axios.post('http://localhost:5000/api/feedback', feedbackData);
+      
+      // 2. Send email notification
+      emailjs.sendForm('service_v6z4web', 'template_71rki5m', form.current, 'WBsHhIONN4glZMqDK')
+        .then((result) => {
+            console.log(result.text);
+            setShowModal(true);
+            form.current.reset();
+        }, (error) => {
+            console.log(error.text);
+            setShowModal(true); // Still show success if DB saved but email failed
+            form.current.reset();
+        });
+    } catch (error) {
+      console.error("Failed to store feedback in MongoDB", error);
+      alert('There was an issue saving your feedback. Please try again later.');
     }
+  }
   return (
     <>
 <form ref={form} onSubmit={sendEmail}>

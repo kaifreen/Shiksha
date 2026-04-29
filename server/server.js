@@ -18,6 +18,7 @@ mongoose.connect(process.env.MONGODB_URI)
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/courses', require('./routes/courseRoutes'));
 app.use('/api/progress', require('./routes/progressRoutes'));
+app.use('/api/feedback', require('./routes/feedbackRoutes'));
 
 // Test route
 app.get('/', (req, res) => {

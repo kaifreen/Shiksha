@@ -7,12 +7,13 @@ import {
 } from "@chakra-ui/react";
 import Header from "./../MyComponents/Header";
 import Footer from "./../MyPages/Footer";
-import numberVideo from "../Videos/Number.mp4";
-import english1Video from "../Videos/English1.mp4";
-import english2Video from "../Videos/English2.mp4";
-import hindi1Video from "../Videos/Hindi1.mp4";
-import hindi2Video from "../Videos/Hindi2.mp4";
-import science2Video from "../Videos/Science2.mp4";
+// Large video files are ignored by git, so we use string paths to avoid build errors on Vercel
+const numberVideo = ""; 
+const english1Video = "";
+const english2Video = "";
+const hindi1Video = "";
+const hindi2Video = "";
+const science2Video = "";
 import axios from "axios";
 import { getAuth } from "firebase/auth";
 import app from "../firebase";
